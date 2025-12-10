@@ -6,7 +6,6 @@ import cv2
 import numpy as np
 import requests
 from .utils.get_images import profiles_collection
-from .utils.medical_question import get_medical_response
 from rest_framework.parsers import MultiPartParser, FormParser
 from bson import json_util
 import json
@@ -136,14 +135,17 @@ def compare_images(request):
                 serialized = json.loads(json_util.dumps(profile[0]))
                 full_profiles.append(serialized)
 
-        return Response(full_profiles)
+       
+        return Response({
+        "success": True,
+        "count": len(full_profiles),
+        "data": full_profiles
+})
         
     except Exception as e:
         return Response({'error': str(e)}, status=500)
     
 
-@api_view(['POST'])
-def medical_chat(request):
     try:
         # Get the user message from the request
         # data = request.get_json()
