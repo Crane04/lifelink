@@ -8,7 +8,7 @@ import getAllProfiles from "../services/profile/getAllProfiles";
 
 class AuthController {
   static register = async (req: Request, res: Response): Promise<any> => {
-    const { email, password, username, fullname } = req.body;
+    const { email, password = "123", username, fullname } = req.body;
 
     const user = await CreateUser.run(email, username, password, fullname);
     if (!user) {

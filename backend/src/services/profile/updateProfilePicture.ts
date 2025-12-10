@@ -3,12 +3,12 @@ import { User, UserModel } from "../../db/users";
 
 interface UpdateProfileInput {
   image: string;
-  sessionToken: string;
+  username: string;
 }
 
 const updateProfilePicture = async (input: UpdateProfileInput) => {
   const user = await UserModel.findOne({
-    "authentication.sessionToken": input.sessionToken,
+    username: input.username,
   });
 
   if (!user) {

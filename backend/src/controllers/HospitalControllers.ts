@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import ApiResponse from "../helpers/ApiResponse";
 import CreateHospital from "../services/hospitals/createHospital";
 import LoginHospital from "../services/hospitals/loginHospital";
@@ -52,15 +52,19 @@ class Hospital {
   };
 
   static getUserProfile = async (req: Request, res: Response): Promise<any> => {
-    const { username } = req.params;
+    try {
+      const { username } = req.params;
 
-    const user = await getUserProfileByUsername(username);
+      const user = await getUserProfileByUsername(username);
 
-    return ApiResponse.success(
-      res,
-      "User Profile retrieved successfully",
-      user
-    );
+      return ApiResponse.success(
+        res,
+        "User Profile retrieved successfully",
+        user
+      );
+    } catch (error) {
+      return ApiResponse.error(res, error.message, 404);
+    }
   };
 
   static verifyHospital = async (req: Request, res: Response): Promise<any> => {

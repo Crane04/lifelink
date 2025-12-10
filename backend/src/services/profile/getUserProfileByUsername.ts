@@ -12,11 +12,13 @@ const getUserProfileByQuery = async (query: string) => {
   });
 
   if (!user) {
-    return null;
+    throw Error("User doesnt exist!");
   }
 
   // Find the profile associated with this user
-  const profile = await ProfileModel.findOne({ user: user._id }).populate("user");
+  const profile = await ProfileModel.findOne({ user: user._id }).populate(
+    "user"
+  );
 
   return profile;
 };

@@ -45,12 +45,7 @@ class ProfileController {
   };
   static updateImage = async (req: Request, res: Response) => {
     try {
-      const sessionToken =
-        req.cookies["sessionToken"] || req.headers.authorization.split(" ")[1];
-
-      if (!sessionToken) {
-        return ApiResponse.error(res, "Unauthenticated", 401);
-      }
+      const { username } = req.params;
 
       if (!req.file) {
         return ApiResponse.error(res, "No image uploaded", 400);
@@ -65,7 +60,7 @@ class ProfileController {
       // Update profile image
       const updatedProfile = await updateProfilePicture({
         image: uploadResult.url,
-        sessionToken,
+        username,
       });
 
       return ApiResponse.success(res, "Profile image updated", updatedProfile);

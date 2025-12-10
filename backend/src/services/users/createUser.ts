@@ -11,7 +11,12 @@ class CreateUser {
     }
   ): Promise<User> {
     const user = await new UserModel(values).save();
-    return user.toObject();
+    return user.toObject({
+      transform: (doc, ret) => {
+        delete ret.authentication;
+        return ret;
+      },
+    });
   }
 
   public static async run(

@@ -25,18 +25,6 @@ export default (router: express.Router) => {
     loginHospitalValidator,
     HospitalController.login
   );
-  router.get(
-    "/hospitals/get-user-profile/:username",
-    validateHospital,
-    HospitalController.getUserProfile
-  );
-
-  router.put(
-    "/hospitals/update-user-profile/:username",
-    updateProfileValidator,
-    validateHospital,
-    ProfileController.updateUserProfileByHospital
-  );
 
   router.post("/hospitals/verify", HospitalController.verifyHospital);
 };

@@ -28,8 +28,6 @@ class CreateHospital {
   ): Promise<Hospital> {
     const salt = random();
 
-    console.log(email, name, password, type, address);
-
     return this.execute({
       email,
       name,

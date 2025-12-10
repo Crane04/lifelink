@@ -1,23 +1,23 @@
 import mongoose from "mongoose";
 import { ProfileModel } from "./profile";
 export type User = {
-  username: string;
   email: string;
   authentication: {
     password: string;
     salt?: string;
     sessionToken?: string;
   };
+  username: string;
   fullname: string;
 };
 
 const UserSchema = new mongoose.Schema<User>({
-  username: {
+  email: {
     type: String,
     required: true,
     unique: true,
   },
-  email: {
+  username: {
     type: String,
     required: true,
     unique: true,
@@ -40,7 +40,7 @@ UserSchema.post("save", async function (doc) {
         phoneNumber: "Not provided",
         dateOfBirth: new Date("2000-01-01"),
       });
-      console.log(`Profile created for user: ${doc.username}`);
+      console.log(`Profile created for user: ${doc.fullname}`);
     }
   } catch (err) {
     console.error("Error creating profile for new user:", err);

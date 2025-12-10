@@ -2,6 +2,7 @@ import express from "express";
 import ApiResponse from "../../helpers/ApiResponse";
 import Validator from "fastest-validator";
 import getUserByEmail from "../../services/users/getUserByEmail";
+import getUserByUsername from "../../services/users/getUserByUsername";
 
 const schema = {
   username: {
@@ -10,10 +11,6 @@ const schema = {
   },
   email: {
     type: "email",
-  },
-  password: {
-    type: "string",
-    min: 6,
   },
 };
 
@@ -41,11 +38,18 @@ const createUserValidator = async (
     ApiResponse.validationError(res, "Validation failed", errors);
     return;
   }
-  const { email } = req.body;
+  const { email, username } = req.body;
 
   const userExists = await getUserByEmail(email);
   if (userExists) {
     ApiResponse.error(res, "User with this email already exists", 400);
+    return;
+  }
+
+  const userUsernameExists = await getUserByUsername(username);
+
+  if (userUsernameExists) {
+    ApiResponse.error(res, "User with this username already exists", 400);
     return;
   }
 
