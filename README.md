@@ -1,14 +1,13 @@
-@host=http://localhost:5000
+1. Run `git clone https://github.com/crane04/lifelink` to clone the repo
 
+2. On your local machine, run the following commands
 
-###
-POST {{host}}/compare
-Content-Type: application/json
+- `cd medical_system`
+- `python3.12 -m venv env`
+- `pip install -r requirements.txt`
 
-{
-    "target_image_url": "https://static.wikia.nocookie.net/amazingspiderman/images/3/33/Tobey_Maguire_Infobox.png/revision/latest/scale-to-width-down/535?cb=20240322015635"
-}
+3. Create `.env` file and get the content from `Mayowa😂😂😂`
 
+5.Finally run:
 
-###
-GET {{host}}/profiles
+- `python manage.py runserver`
