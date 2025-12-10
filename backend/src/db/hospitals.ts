@@ -34,7 +34,7 @@ const HospitalSchema = new mongoose.Schema<Hospital>({
     required: true,
   },
   address: { type: String, required: true },
-  verified: { type: Boolean, required: false },
+  verified: { type: Boolean, required: false, default: true },
 });
 
 export const HospitalModel = mongoose.model("Hospital", HospitalSchema);

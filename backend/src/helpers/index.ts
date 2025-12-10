@@ -8,6 +8,7 @@ export const random = () => {
 };
 
 export const authentication = (salt: string, password: string) => {
+  console.log(salt, password);
   return crypto
     .createHmac("sha256", [salt, password].join("/"))
     .update(SECRET)

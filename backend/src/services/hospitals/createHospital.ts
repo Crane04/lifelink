@@ -10,8 +10,13 @@ class CreateHospital {
       };
     }
   ): Promise<Hospital> {
-    const Hospital = await new HospitalModel(values).save();
-    return Hospital.toObject();
+    const hospital = await new HospitalModel(values).save();
+    return hospital.toObject({
+      transform: (doc, ret) => {
+        delete ret.authentication;
+        return ret;
+      },
+    });
   }
 
   public static async run(
@@ -22,6 +27,8 @@ class CreateHospital {
     address: string
   ): Promise<Hospital> {
     const salt = random();
+
+    console.log(email, name, password, type, address);
 
     return this.execute({
       email,

@@ -19,18 +19,18 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(cookieParser());
-// app.use(express.urlencoded(true));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const server = http.createServer(app);
 
-const MONGO_URL = process.env.MONGO_URL;
+const MONGO_URI = process.env.MONGO_URI;
 const port = process.env.PORT;
 
 mongoose
-  .connect(MONGO_URL)
+  .connect(MONGO_URI)
   .then(() => {
-    server.listen(8080, () => {
+    server.listen(port, () => {
       console.log(`Server is running at http://localhost:${port}`);
     });
   })

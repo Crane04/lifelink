@@ -4,7 +4,7 @@ import AuthController from "../controllers/AuthController";
 import updateProfileValidator from "../validators/profile/updateProfile";
 import ProfileController from "../controllers/ProfileController";
 import upload from "../middlewares/multer";
-import { validateDoctorHospital } from "../middlewares/validateDoctorOrHospital";
+import { validateHospital } from "../middlewares/validateHospital";
 
 export default (router: express.Router) => {
   router.get("/users/retrieve", validateUser, AuthController.getUser);
@@ -17,7 +17,7 @@ export default (router: express.Router) => {
     updateProfileValidator,
     ProfileController.updateUserProfile
   );
-  router.get("/users/all", validateDoctorHospital, AuthController.getAllUsers);
+  router.get("/users/all", validateHospital, AuthController.getAllUsers);
   router.put(
     "/users/update-profile-image",
     validateUser,

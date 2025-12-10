@@ -1,7 +1,6 @@
 import express from "express";
 import { get, merge } from "lodash";
 import getHospitalBySessionToken from "../services/hospitals/getHospitalBySessionToken";
-import getDoctorBySessionToken from "../services/doctors/getDoctorBySessionToken";
 import ApiResponse from "../helpers/ApiResponse";
 
 export const validateHospital = async (

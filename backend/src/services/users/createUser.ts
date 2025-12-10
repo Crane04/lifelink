@@ -18,11 +18,7 @@ class CreateUser {
     email: string,
     username: string,
     password: string,
-    fullname: string,
-    location?: {
-      latitude: number;
-      longitude: number;
-    }
+    fullname: string
   ): Promise<User> {
     const salt = random();
 
@@ -34,7 +30,6 @@ class CreateUser {
         password: authentication(salt, password),
       },
       fullname,
-      location,
     });
   }
 }

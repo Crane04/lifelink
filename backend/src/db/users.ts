@@ -9,10 +9,6 @@ export type User = {
     sessionToken?: string;
   };
   fullname: string;
-  location?: {
-    latitude: number;
-    longitude: number;
-  };
 };
 
 const UserSchema = new mongoose.Schema<User>({
@@ -32,10 +28,6 @@ const UserSchema = new mongoose.Schema<User>({
     sessionToken: { type: String, select: false },
   },
   fullname: { type: String, required: true },
-  location: {
-    latitude: { type: Number, required: false },
-    longitude: { type: Number, required: false },
-  },
 });
 UserSchema.post("save", async function (doc) {
   try {
